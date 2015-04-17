@@ -26,7 +26,7 @@ public class Kalkulator {
     ArrayList<String> operation;
     BigDecimal result;
     BigDecimal memoryStore;
-    opEqual var;
+    Operations var;
     Integer prec;
     boolean root;
 
@@ -45,7 +45,7 @@ public class Kalkulator {
         operation = new ArrayList<String>();    // allaylist dla oznaczen operacji 
         prec = 15;                  // kontroluje ilość wyświetlanych miejsc po przecinku,
         memoryStore = new BigDecimal(0);         // BigDecimal przechowywujący wartości w memory 
-        var = new opEqual();                     // obiekt dzięki któremu można przeprowadzić metodę uzyskującą wyniki 
+        var = new Operations();                     // obiekt dzięki któremu można przeprowadzić metodę uzyskującą wyniki
         root=false;
 
         /** GUI **/
@@ -284,16 +284,16 @@ public class Kalkulator {
         frame.setVisible(true);
     }
 
-    /** opEqual to metoda dająca wyniki dla poszczególnych operacji, pobiera ona ArrayList<BigDecimal> z wartościami 
+    /** Operations to metoda dająca wyniki dla poszczególnych operacji, pobiera ona ArrayList<BigDecimal> z wartościami
      * listy memory, oraz ArrayList<String> z wartościami listy operation. Pobiera ostatnie wartości wcześniej wprowadzone 
      * i zapisane w liście memory, a następnie na podstawie oznaczenia operacji (1+,2-,3*,4:,5 potęgowanie, 7 % 
      * - nie ma 6, pierwiastkowania, jest ono obliczene włąsną metodą) pobranej z listy operation, dokonuje obliczeń i 
      * zwraca BigDecimal temp z wynikiem. Wszystkie obliczenia oparte są o metody klasy BigDecimal(add, substract, multiply, 
      * divide, pow) 
-     * opEqual należy do odrębnej klasy wewnętrznej, dzięki czemu może swobodnie używać zmiennych publicznych innych klas, 
+     * Operations należy do odrębnej klasy wewnętrznej, dzięki czemu może swobodnie używać zmiennych publicznych innych klas,
      * */
 
-    class opEqual{
+    class Operations {
         public BigDecimal opEqual(ArrayList<BigDecimal> list, ArrayList<String> s){
             BigDecimal temp = new BigDecimal(0);
             int op = Integer.parseInt(s.get(0));
@@ -504,7 +504,7 @@ public class Kalkulator {
                 try{                                                          //w przypadku normalnej próby uzyskania wyniku działania: 
                     memory.add(new BigDecimal(numValue));       // dodanie drugiej wartosci do pamieci
                     numValue="";
-                    result = var.opEqual(memory, operation);    //przeprowadzenie metody opEqual na zmiennych
+                    result = var.opEqual(memory, operation);    //przeprowadzenie metody Operations na zmiennych
                     mainDisplay.setText(result.setScale(prec,RoundingMode.HALF_DOWN).stripTrailingZeros().toPlainString());
 
                     operation.add(0,"0");
@@ -553,11 +553,11 @@ public class Kalkulator {
                 operation.add(0,"1");
                 secDisplay.append("+"); 
             /*w sytuacji, kiedy ktoś kontytuuje wpisywanie operacji bez użycia przycisku "="*/
-            }else if((!operation.isEmpty())&& operation.get(0)!=("0")){
+            }else if((!operation.isEmpty())&& !operation.get(0).equals("0")){
                 try{
                     memory.add(new BigDecimal(numValue));               // dodaje obecną wartość numValue do pamieci 
                     numValue="";                                        // czyści wartość numValue 
-                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych 
+                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych
                     mainDisplay.setText(result.toString());             // wyświetla wynik 
                     memory.removeAll(memory);                           //czyści pamięć, żeby wcześniej dodane liczby nie przeszkadzały 
                     memory.add(new BigDecimal(mainDisplay.getText()));  // dodaje wynik jako pierwsza liczbe w zbiorze 
@@ -591,11 +591,11 @@ public class Kalkulator {
                 operation.add(0,"2");
                 secDisplay.append("-"); 
             /*w sytuacji, kiedy ktoś kontytuuje wpisywanie operacji bez użycia przycisku "="*/
-            }else if((!operation.isEmpty())&& operation.get(0)!=("0")){
+            }else if((!operation.isEmpty())&& !operation.get(0).equals("0")){
                 try{
                     memory.add(new BigDecimal(numValue));               // dodaje obecną wartość numValue do pamieci 
                     numValue="";                                        // czyści wartość numValue 
-                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych 
+                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych
                     mainDisplay.setText(result.toString());             // wyświetla wynik 
                     memory.removeAll(memory);                           //czyści pamięć, żeby wcześniej dodane liczby nie przeszkadzały 
                     memory.add(new BigDecimal(mainDisplay.getText()));  // dodaje wynik jako pierwsza liczbe w zbiorze 
@@ -629,11 +629,11 @@ public class Kalkulator {
                 operation.add(0,"3");
                 secDisplay.append("\u00D7"); 
             /*w sytuacji, kiedy ktoś kontytuuje wpisywanie operacji bez użycia przycisku "="*/
-            }else if((!operation.isEmpty())&& operation.get(0)!=("0")){
+            }else if((!operation.isEmpty())&& !operation.get(0).equals("0")){
                 try{
                     memory.add(new BigDecimal(numValue));               // dodaje obecną wartość numValue do pamieci 
                     numValue="";                                        // czyści wartość numValue 
-                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych 
+                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych
                     mainDisplay.setText(result.toString());             // wyświetla wynik 
                     memory.removeAll(memory);                           //czyści pamięć, żeby wcześniej dodane liczby nie przeszkadzały 
                     memory.add(new BigDecimal(mainDisplay.getText()));  // dodaje wynik jako pierwsza liczbe w zbiorze 
@@ -667,11 +667,11 @@ public class Kalkulator {
                 operation.add(0,"4");
                 secDisplay.append(":"); 
             /*w sytuacji, kiedy ktoś kontytuuje wpisywanie operacji bez użycia przycisku "="*/
-            }else if((!operation.isEmpty())&& operation.get(0)!=("0")){
+            }else if((!operation.isEmpty())&& !operation.get(0).equals("0")){
                 try{
                     memory.add(new BigDecimal(numValue));               // dodaje obecną wartość numValue do pamieci 
                     numValue="";                                        // czyści wartość numValue 
-                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych 
+                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych
                     mainDisplay.setText(result.setScale(prec,RoundingMode.HALF_DOWN).stripTrailingZeros().toPlainString());             // wyświetla wynik 
                     memory.removeAll(memory);                           //czyści pamięć, żeby wcześniej dodane liczby nie przeszkadzały 
                     memory.add(new BigDecimal(mainDisplay.getText()));  // dodaje wynik jako pierwsza liczbe w zbiorze 
@@ -708,7 +708,7 @@ public class Kalkulator {
                 try{
                     memory.add(new BigDecimal(numValue));               // dodaje obecną wartość numValue do pamieci 
                     numValue="";                                        // czyści wartość numValue 
-                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych 
+                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych
                     mainDisplay.setText(result.toString());             // wyświetla wynik 
                     memory.removeAll(memory);                           //czyści pamięć, żeby wcześniej dodane liczby nie przeszkadzały 
                     memory.add(new BigDecimal(mainDisplay.getText()));  // dodaje wynik jako pierwsza liczbe w zbiorze 
@@ -741,11 +741,11 @@ public class Kalkulator {
                 operation.add(0,"7");
                 secDisplay.append("%"); 
             /*w sytuacji, kiedy ktoś kontytuuje wpisywanie operacji bez użycia przycisku "="*/
-            }else if((!operation.isEmpty())&& operation.get(0)!=("0")){
+            }else if((!operation.isEmpty())&& !operation.get(0).equals("0")){
                 try{
                     memory.add(new BigDecimal(numValue));               // dodaje obecną wartość numValue do pamieci 
                     numValue="";                                        // czyści wartość numValue 
-                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych 
+                    result = var.opEqual(memory, operation);            // przeprowadzenie operacje na zmiennych
                     mainDisplay.setText(result.toString());             // wyświetla wynik 
                     memory.removeAll(memory);                           //czyści pamięć, żeby wcześniej dodane liczby nie przeszkadzały 
                     memory.add(new BigDecimal(mainDisplay.getText()));  // dodaje wynik jako pierwsza liczbe w zbiorze 
@@ -766,7 +766,7 @@ public class Kalkulator {
 
     /**
      * Listener pierwiastkowania to najbardziej odmienna metoda, spośród dostępnych działań. W przeciwieńśtwie do pozostałych 
-     * operacji, nie wykorzystuje metody opEqual do uzyskania wartości, ale robi to samodzielnie i podstawia wynik. 
+     * operacji, nie wykorzystuje metody Operations do uzyskania wartości, ale robi to samodzielnie i podstawia wynik.
      * Spowodowało to sporo problemów: odmienna kolejnosć dodawania do pamięci, wyświetlanie, zaburzenie kolejnośći wprowadzania 
      * wartości do listy memory, brak operation, etc. Metoda odpowiada na nastepujące możliwości: 
      * - pierwiastkowanie wyniku wcześniejszych operacji, 
