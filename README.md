@@ -1,3 +1,5 @@
+#Calculator
+
 My first finished Java project.
 
 Simple calculator with basic features:
