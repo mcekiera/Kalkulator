@@ -1,4 +1,4 @@
-<i>My first finished Java project.<i>
+<html><i>My first finished Java project.<i>
 
 Simple calculator with basic features:
 - basic math operations: add, subtract, multiply, divide,
@@ -11,5 +11,5 @@ Simple calculator with basic features:
 - current and full equatation (with order of operations) solving modes.
 
 Whole code put in one extremaly complicated class. Very importatn lesson for future, to never do that again,
-a nightmare to modify and maintain.
+a nightmare to modify and maintain.</html>
 
